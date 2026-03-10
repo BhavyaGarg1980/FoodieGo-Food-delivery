@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+    
+  <h2>Add Restaurant</h2>
+
+  <input id="name" placeholder="Restaurant Name">
+  <input id="description" placeholder="Description">
+  <button onclick="addRestaurant()">Add</button>
+
+<script>
+async function addRestaurant() {
+  await fetch("http://localhost:5000/api/restaurants", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: name.value,
+      description: description.value
+    })
+  });
+
+  alert("Restaurant Added");
+}
+</script>
+</body>
+</html>

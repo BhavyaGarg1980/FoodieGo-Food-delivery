@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1773131022093,
+    "restaurantId": 1773130862180,
+    "name": "Margherita Pizza",
+    "price": 199,
+    "image": "pizza.jpg"
+  },
+  {
+    "id": 1773139891158,
+    "restaurantId": "1773139437823",
+    "name": "Veggie Delight Sub",
+    "price": 149,
+    "image": "subway.jpg"
+  }
+]

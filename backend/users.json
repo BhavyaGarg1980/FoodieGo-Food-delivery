@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1773054602143,
+    "email": "bhavya@gmail.com",
+    "password": "12345"
+  },
+  {
+    "id": 1773054881937,
+    "email": "abc@gmail.com",
+    "password": "9876"
+  },
+  {
+    "id": 1773060591838,
+    "name": "123",
+    "email": "123@gmail.com",
+    "password": "123"
+  },
+  {
+    "id": 1773061247417,
+    "name": "bhavyagarg",
+    "email": "bhavyagarg@gmail.com",
+    "password": "5678"
+  },
+  {
+    "id": 1773063160136,
+    "name": "sam",
+    "email": "sam@gmail.com",
+    "password": "123"
+  },
+  {
+    "id": 1773123606721,
+    "name": "ram",
+    "email": "ram@gmail.com",
+    "password": "135"
+  }
+]

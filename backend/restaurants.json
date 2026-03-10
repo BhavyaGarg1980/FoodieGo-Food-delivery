@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1773139437823,
+    "name": "Subway",
+    "description": "Fresh sandwiches, wraps, and salads made with quality ingredients",
+    "image": "https://1000logos.net/wp-content/uploads/2017/09/Subway-logo.png"
+  },
+  {
+    "id": 1773140418797,
+    "name": "Dominos",
+    "description": "Popular pizza delivery restaurant",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/74/Dominos_pizza_logo.svg"
+  },
+  {
+    "id": 1773140439263,
+    "name": "Burger King",
+    "description": "Flame grilled burgers and fast food",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg"
+  },
+  {
+    "id": 1773140455715,
+    "name": "McDonalds",
+    "description": "World famous burgers and fries",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/McDonald%27s_Golden_Arches.svg"
+  },
+  {
+    "id": 1773140567114,
+    "name": "KFC",
+    "description": "Kentucky Fried Chicken and crispy buckets",
+    "image": "https://upload.wikimedia.org/wikipedia/sco/thumb/b/bf/KFC_logo.svg/1200px-KFC_logo.svg.png"
+  }
+]

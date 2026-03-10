@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signup</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+  url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+  background-size:cover;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:10px;
+  width:300px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  text-align:center;
+}
+
+h2{
+  margin-bottom:20px;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:1px solid #ddd;
+  border-radius:5px;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  background:#ff4d4d;
+  border:none;
+  color:white;
+  font-weight:bold;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#e63939;
+}
+
+a{
+  text-decoration:none;
+  color:#ff4d4d;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Create Account</h2>
+
+<form autocomplete="off">
+
+<input id="name" placeholder="Name" autocomplete="off">
+<br><br>
+
+<input id="email" type="email" placeholder="Email" autocomplete="off">
+<br><br>
+
+<input id="password" type="password" placeholder="Password" autocomplete="new-password">
+<br><br>
+
+<button onclick="signup()">Signup</button>
+
+</form>
+
+<p>Already have an account?  
+<a href="login.html">Login</a></p>
+
+</div>
+
+
+<script>
+
+async function signup(){
+
+const name=document.getElementById("name").value
+const email=document.getElementById("email").value
+const password=document.getElementById("password").value
+
+await fetch("http://localhost:5000/api/auth/signup",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+name:name,
+email:email,
+password:password
+})
+})
+
+alert("Signup Successful")
+
+window.location="login.html"
+
+}
+
+</script>
+
+</body>
+</html>

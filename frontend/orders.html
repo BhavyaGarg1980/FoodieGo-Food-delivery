@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Your Orders</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
+}
+
+/* HEADER */
+
+header{
+background:#ff4d4d;
+color:white;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h2{
+margin:0;
+}
+
+header a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+background:white;
+color:#ff4d4d;
+padding:8px 14px;
+border-radius:5px;
+}
+
+/* MAIN */
+
+.container{
+padding:40px;
+text-align:center;
+}
+
+h1{
+margin-bottom:30px;
+}
+
+/* NO ORDERS */
+
+.no-orders{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+max-width:400px;
+margin:auto;
+}
+
+.no-orders img{
+width:120px;
+margin-bottom:20px;
+}
+
+.no-orders p{
+font-size:18px;
+color:#555;
+}
+
+.no-orders button{
+margin-top:20px;
+padding:10px 18px;
+border:none;
+background:#ff4d4d;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* ORDER CARDS */
+
+.order-card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>FoodieGo</h2>
+
+<a href="index.html">Home</a>
+
+</header>
+
+
+<div class="container">
+
+<h1>Your Orders</h1>
+
+<div id="ordersList"></div>
+
+</div>
+
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const container = document.getElementById("ordersList");
+
+if(orders.length === 0){
+
+container.innerHTML = `
+<div class="no-orders">
+
+<img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png">
+
+<p>You have no orders yet</p>
+
+<button onclick="goRestaurants()">
+Order Now
+</button>
+
+</div>
+`;
+
+}
+else{
+
+orders.forEach(order => {
+
+container.innerHTML += `
+<div class="order-card">
+
+<h3>${order.name}</h3>
+
+<p>Price: ₹${order.price}</p>
+
+<p>Quantity: ${order.qty}</p>
+
+</div>
+`;
+
+});
+
+}
+
+function goRestaurants(){
+window.location="restaurants.html";
+}
+
+</script>
+
+</body>
+</html>

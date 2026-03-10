@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Delivery</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+  .section-title{
+    text-align:center;
+    margin-top:40px;
+    font-size:28px;
+  }
+
+  .container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
+  }
+
+  .card{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    overflow:hidden;
+    transition:0.3s;
+  }
+
+  .card:hover{
+    transform:translateY(-5px);
+  }
+
+  .card img{
+    width:100%;
+    height:160px;
+    object-fit:contain;
+    background:white;
+  }
+
+  .card-content{
+    padding:15px;
+  }
+
+  .card button{
+    margin-top:10px;
+    padding:8px 14px;
+    background:#ff4d4d;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+  }
+
+  .view-all{
+    text-align:center;
+    margin-bottom:40px;
+  }
+
+  .view-all button{
+    padding:12px 20px;
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+  }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar"></div>
+
+<script>
+fetch("navbar.html")
+.then(res => res.text())
+.then(data => {
+
+  document.getElementById("navbar").innerHTML = data;
+
+  const user = localStorage.getItem("username");
+
+  const loginLink = document.getElementById("loginLink");
+  const signupLink = document.getElementById("signupLink");
+  const userName = document.getElementById("userName");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if(user){
+    loginLink.style.display = "none";
+    signupLink.style.display = "none";
+    userName.innerText = "👤 " + user;
+  } else {
+    logoutBtn.style.display = "none";
+  }
+
+  // logout button
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("cart");
+    window.location.href = "index.html";
+  });
+
+});
+</script>
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+  <h1>Order Your Favorite Food 🍕</h1>
+</section>
+
+<!-- POPULAR RESTAURANTS -->
+
+<h2 class="section-title">Popular Restaurants</h2>
+
+<div class="container" id="restaurantList"></div>
+
+<div class="view-all">
+  <a href="restaurants.html">
+    <button>View All Restaurants</button>
+  </a>
+</div>
+
+<script>
+
+async function loadPopularRestaurants(){
+
+  const res = await fetch("http://localhost:5000/api/restaurants");
+  const data = await res.json();
+
+  const list = document.getElementById("restaurantList");
+  list.innerHTML="";
+
+  // show only 4 restaurants
+  const popular = data.slice(0,4);
+
+  popular.forEach(r=>{
+    list.innerHTML += `
+      <div class="card">
+        <img src="${r.image}">
+        <div class="card-content">
+          <h3>${r.name}</h3>
+          <p>${r.description}</p>
+          <button onclick="viewMenu('${r._id}')">View Menu</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function viewMenu(id){
+  window.location="menu.html?restaurantId="+id;
+}
+
+loadPopularRestaurants();
+
+</script>
+
+</body>
+</html>

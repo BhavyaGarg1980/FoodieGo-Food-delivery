@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Menu</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:#f5f5f5;
+}
+
+header{
+background:#ff4d4d;
+color:white;
+padding:20px;
+}
+
+.container{
+padding:30px;
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.menu-card{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.menu-card img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:6px;
+}
+
+.menu-card h3{
+margin:10px 0 5px;
+}
+
+.price{
+color:#ff4d4d;
+font-weight:bold;
+}
+
+button{
+margin-top:10px;
+padding:8px 12px;
+border:none;
+background:#ff4d4d;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.back{
+display:inline-block;
+margin-top:10px;
+color:white;
+text-decoration:none;
+}
+
+.empty{
+text-align:center;
+font-size:18px;
+margin-top:40px;
+color:#666;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Restaurant Menu</h1>
+<a class="back" href="restaurants.html">← Back to Restaurants</a>
+</header>
+
+<div class="container">
+
+<h2>Menu Items</h2>
+
+<div id="menuList" class="menu-grid"></div>
+
+<div id="emptyMessage" class="empty"></div>
+
+</div>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search);
+const restaurantId = urlParams.get("restaurantId");
+
+async function loadMenu(){
+
+try{
+
+const res = await fetch("http://localhost:5000/api/menu/" + restaurantId);
+const data = await res.json();
+
+console.log("Menu Data:", data);
+
+const list = document.getElementById("menuList");
+const empty = document.getElementById("emptyMessage");
+
+list.innerHTML="";
+empty.innerHTML="";
+
+if(!data || data.length === 0){
+empty.innerHTML="No menu items found for this restaurant.";
+return;
+}
+
+data.forEach(item => {
+
+const name = item.name || "Unknown Item";
+const price = item.price || 0;
+const image = item.image || "https://via.placeholder.com/200";
+
+list.innerHTML += `
+<div class="menu-card">
+
+<img src="${image}" />
+
+<h3>${name}</h3>
+
+<p class="price">₹${price}</p>
+
+<button onclick="addToCart('${name}',${price})">
+Add to Cart
+</button>
+
+</div>
+`;
+
+});
+
+}
+catch(err){
+console.error(err);
+document.getElementById("emptyMessage").innerHTML="Failed to load menu.";
+}
+
+}
+
+function addToCart(name,price){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({name,price,qty:1});
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+alert(name + " added to cart");
+
+}
+
+loadMenu();
+
+</script>
+
+</body>
+</html>

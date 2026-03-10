@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+  url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+  background-size:cover;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:10px;
+  width:300px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  text-align:center;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:1px solid #ddd;
+  border-radius:5px;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  background:#ff4d4d;
+  border:none;
+  color:white;
+  font-weight:bold;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#e63939;
+}
+
+a{
+  text-decoration:none;
+  color:#ff4d4d;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Login</h2>
+
+<!-- <form autocomplete="off"> -->
+
+<input id="email" type="email" placeholder="Email" autocomplete="off">
+<br><br>
+
+<input id="password" type="password" placeholder="Password" autocomplete="new-password">
+<br><br>
+
+<button type="button" onclick="login()">Login</button>
+
+<!-- </form> -->
+
+<p>Don't have an account?  
+<a href="signup.html">Signup</a></p>
+
+</div>
+
+
+<script>
+
+async function login(){
+
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+const res = await fetch("http://localhost:5000/api/auth/login",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+email:email,
+password:password
+})
+});
+
+const data = await res.json();
+
+if(res.status === 200){
+
+// SAVE USERNAME
+localStorage.setItem("username", data.user.name);
+
+window.location.href="index.html";
+
+}else{
+
+alert(data.message);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<nav>
+
+<h2 class="logo">FoodieGo</h2>
+
+<div class="nav-links">
+
+<a href="index.html">Home</a>
+<a href="restaurants.html">Restaurants</a>
+<a href="orders.html">Orders</a>
+<a href="about.html">About</a>
+
+<a id="loginLink" href="login.html">Login</a>
+<a id="signupLink" href="signup.html">Signup</a>
+
+<span id="userName" class="user"></span>
+
+<a href="cart.html" class="cart">🛒</a>
+
+<button id="logoutBtn">Logout</button>
+
+</div>
+
+</nav>
+
+<style>
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:#ff4d4d;
+color:white;
+font-family:Segoe UI;
+}
+
+.logo{
+margin:0;
+}
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+font-weight:500;
+}
+
+.nav-links a:hover{
+text-decoration:underline;
+}
+
+.user{
+font-weight:bold;
+}
+
+.cart{
+font-size:20px;
+}
+
+#logoutBtn{
+padding:6px 12px;
+border:none;
+background:white;
+color:#ff4d4d;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+</style>
+
+
+<script>
+
+function updateNavbar(){
+
+const user = localStorage.getItem("username");
+
+const loginLink = document.getElementById("loginLink");
+const signupLink = document.getElementById("signupLink");
+const userName = document.getElementById("userName");
+const logoutBtn = document.getElementById("logoutBtn");
+
+if(user){
+
+if(loginLink) loginLink.style.display="none";
+if(signupLink) signupLink.style.display="none";
+
+if(userName){
+userName.innerText = "👤 " + user;
+}
+
+}else{
+
+if(userName) userName.innerText="";
+if(logoutBtn) logoutBtn.style.display="none";
+
+}
+
+}
+
+document.addEventListener("DOMContentLoaded", updateNavbar);
+
+function logout(){
+
+localStorage.removeItem("username");
+localStorage.removeItem("cart");
+
+window.location="index.html";
+
+}
+
+updateNavbar();
+
+</script>
