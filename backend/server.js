@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-"mongodb+srv://bhavyagarg:bhavyamongo24@foodiego.mydbtl7.mongodb.net/foodDelivery?retryWrites=true&w=majority"
+"mongodb+srv://username:password@clustername.mydbtl7.mongodb.net/foodDelivery?retryWrites=true&w=majority"
 )
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
