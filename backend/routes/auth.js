@@ -9,18 +9,13 @@ const usersFile = path.join(__dirname, "../users.json");
 
 // SIGNUP
 router.post("/signup", (req, res) => {
-
   const { name, email, password } = req.body;
-
   let users = [];
-
   if (fs.existsSync(usersFile)) {
     const data = fs.readFileSync(usersFile);
     users = JSON.parse(data);
   }
-
   const existingUser = users.find(u => u.email === email);
-
   if (existingUser) {
     return res.status(400).json({ message: "User already exists" });
   }
@@ -33,9 +28,7 @@ router.post("/signup", (req, res) => {
   };
 
   users.push(newUser);
-
   fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
-
   res.json({
     message: "Signup successful",
     user: newUser
